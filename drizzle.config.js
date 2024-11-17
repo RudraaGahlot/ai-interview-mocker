@@ -6,8 +6,8 @@ module.exports = {
     schema: "./utils/schema.js",
     dialect: 'postgresql',
     dbCredentials: {
-        url : "postgresql://neondb_owner:TJ63PDXMlOCA@ep-divine-snow-a5airy6w.us-east-2.aws.neon.tech/ai-interview-mocker?sslmode=require"
-    },
+       url : DATABASE_URL 
+   },
     
     connection: {
       ssl: {
