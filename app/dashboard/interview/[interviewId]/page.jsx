@@ -4,38 +4,32 @@ import { db } from '@/utils/db';
 import { MockInterview } from '@/utils/schema';
 import { eq } from 'drizzle-orm';
 import { Lightbulb, WebcamIcon } from 'lucide-react';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Webcam from 'react-webcam';
-import { use } from 'react';
 
 
-// 
-const Interview = ({ params }) => {
-    // Unwrap params using use() hook
-    const unwrappedParams = use(params);
-    const interviewId = unwrappedParams.interviewId;
+function Interview({ params }) {
 
     const [interviewData, setInterviewData] = useState();
     const [webCamEnabled, setWebCamEnabled] = useState(false);
 
     useEffect(() => {
-        if (interviewId) {
-            console.log('Interview ID:', interviewId);
-            GetInterviewDetails();
-        }
-    }, [interviewId]); // Dependency array ensures this runs when interviewId changes
+       console.log(params.interviewId);
+       GetInterviewDetails();
+       
+    }, []); // Dependency array ensures this runs when interviewId changes
 
     /**
      * Used to get interview details by mockId
      */
     const GetInterviewDetails = async () => {
-        try {
-            // Assuming db and MockInterview are set up correctly
-            const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, interviewId));
+
+            const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
             setInterviewData(result[0]);
-        } catch (error) {
-            console.error('Error fetching interview details:', error);
-        }
+    
+            console.log(result);
+        
     };
   return (
     <div className='my-10 '>
@@ -81,7 +75,10 @@ const Interview = ({ params }) => {
         
         </div>
         <div className="mt-5 flex justify-end items-end">
-            <Button >Start Interview</Button>
+            <Link href={'/dashboard/interview/'+params.interviewId+'/start'} >
+                <Button >Start Interview</Button>
+                </Link>
+            
             </div>
     </div>
   )
