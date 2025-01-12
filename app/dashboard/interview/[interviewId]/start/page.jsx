@@ -2,10 +2,11 @@
 import { db } from '@/utils/db';
 import { MockInterview } from '@/utils/schema';
 import { eq } from 'drizzle-orm';
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import QuestionSection from './_components/QuestionSection';
 
 function StartInterview({params}){
+    const unwrappedParams = use(params);
 
     const [interviewData, setInterviewData] = useState();
     const [mockInterviewQuestion, setMockInterviewQuestion] = useState();
@@ -16,7 +17,7 @@ function StartInterview({params}){
     },[]);
     const GetInterviewDetails = async () => {
     
-                const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+                const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, unwrappedParams.interviewId));
                 setInterviewData(result[0]);
         
                const jsonMockResp = JSON.parse(result[0].jsonMockResp)

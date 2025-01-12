@@ -85,11 +85,51 @@ function AddNewInterview() {
         >
             <h2 className='text-lg text-center'>+ Add New</h2>
         </div>
-        <Dialog open={openDailog}> 
+        <Dialog open={openDailog}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Tell me more about the Job you are interviewing</DialogTitle>
+          <DialogDescription>
+            
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={onSubmit}>
+                    <div className='p-2'>
+                      <label>Job Role/Position</label>
+                      <Input required 
+                        onChange={(event) => setJobPosition(event.target.value)}
+                      />
+                    </div>
+                    <div className='p-2'>
+                      <label>Job Description/Tech stack (in short)</label>
+                      <Textarea required 
+                        onChange={(event) => setJobDesc(event.target.value)}
+                      />
+                    </div>
+                    <div className='p-2'>
+                      <label>Years of experience</label>
+                      <Input type="number" required max="50"
+                        onChange={(event) => setJobExperience(event.target.value)}
+                      />
+                    </div>
+                    <div className='flex gap-5 justify-end'>
+                    <Button type="button" variant="ghost" onClick={()=>setOpenDailog(false)}>Cancel</Button>
+                    <Button type="submit" disabled={loading}>
+                        {loading?
+                          <>
+                          <LoaderCircle className='animate-spin' />Generating from AI
+                          </>:'Start Interview'
+                        }
+                      </Button>
+                    </div>
+                  </form>
+      </DialogContent>
+    </Dialog>
+        {/* <Dialog open={openDailog}> 
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Tell me more about the Job you are interviewing</DialogTitle>
-                <DialogDescription>
+                <DialogDescription as="div">
                 <form onSubmit={onSubmit}>
                     <div className='p-2'>
                       <label>Job Role/Position</label>
@@ -123,7 +163,7 @@ function AddNewInterview() {
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
-        </Dialog>
+        </Dialog> */}
 
     </div>
   )

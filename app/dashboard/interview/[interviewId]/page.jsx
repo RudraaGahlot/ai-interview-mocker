@@ -5,17 +5,18 @@ import { MockInterview } from '@/utils/schema';
 import { eq } from 'drizzle-orm';
 import { Lightbulb, WebcamIcon } from 'lucide-react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import Webcam from 'react-webcam';
 
 
 function Interview({ params }) {
+    const unwrappedParams = use(params);
 
     const [interviewData, setInterviewData] = useState();
     const [webCamEnabled, setWebCamEnabled] = useState(false);
 
     useEffect(() => {
-       console.log(params.interviewId);
+       console.log(unwrappedParams.interviewId);
        GetInterviewDetails();
        
     }, []); // Dependency array ensures this runs when interviewId changes
@@ -25,7 +26,7 @@ function Interview({ params }) {
      */
     const GetInterviewDetails = async () => {
 
-            const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+            const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, unwrappedParams.interviewId));
             setInterviewData(result[0]);
     
             console.log(result);
@@ -75,7 +76,7 @@ function Interview({ params }) {
         
         </div>
         <div className="mt-5 flex justify-end items-end">
-            <Link href={'/dashboard/interview/'+params.interviewId+'/start'} >
+            <Link href={`/dashboard/interview/${unwrappedParams.interviewId}/start`} >
                 <Button >Start Interview</Button>
                 </Link>
             
