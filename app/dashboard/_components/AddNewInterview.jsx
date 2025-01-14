@@ -47,9 +47,14 @@ function AddNewInterview() {
     
     const result = await chatSession.sendMessage(InputPrompt);
 
-    const MockJSONResp = (result.response.text()).replace('```json', '').replace('```', '');
+    const MockJSONResp = (await result.response.text()).replace(/```json|```/g, '').trim(); // Remove any leading/trailing whitespace
+    console.log(MockJSONResp);
     console.log(JSON.parse(MockJSONResp));
-    setJsonResponse(MockJSONResp);
+    setJsonResponse(JSON.parse(MockJSONResp));
+
+    // const MockJSONResp = (result.response.text()).replace('```json', '').replace('```', '');
+    // console.log(JSON.parse(MockJSONResp));
+    // setJsonResponse(MockJSONResp);
 
     if(MockJSONResp){
     const resp  = await db.insert(MockInterview).values({
@@ -125,46 +130,7 @@ function AddNewInterview() {
                   </form>
       </DialogContent>
     </Dialog>
-        {/* <Dialog open={openDailog}> 
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Tell me more about the Job you are interviewing</DialogTitle>
-                <DialogDescription as="div">
-                <form onSubmit={onSubmit}>
-                    <div className='p-2'>
-                      <label>Job Role/Position</label>
-                      <Input required 
-                        onChange={(event) => setJobPosition(event.target.value)}
-                      />
-                    </div>
-                    <div className='p-2'>
-                      <label>Job Description/Tech stack (in short)</label>
-                      <Textarea required 
-                        onChange={(event) => setJobDesc(event.target.value)}
-                      />
-                    </div>
-                    <div className='p-2'>
-                      <label>Years of experience</label>
-                      <Input type="number" required max="50"
-                        onChange={(event) => setJobExperience(event.target.value)}
-                      />
-                    </div>
-                    <div className='flex gap-5 justify-end'>
-                    <Button type="button" variant="ghost" onClick={()=>setOpenDailog(false)}>Cancel</Button>
-                    <Button type="submit" disabled={loading}>
-                        {loading?
-                          <>
-                          <LoaderCircle className='animate-spin' />Generating from AI
-                          </>:'Start Interview'
-                        }
-                      </Button>
-                    </div>
-                  </form>
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-        </Dialog> */}
-
+        
     </div>
   )
 }

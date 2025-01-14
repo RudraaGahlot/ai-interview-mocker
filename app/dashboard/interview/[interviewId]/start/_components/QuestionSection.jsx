@@ -1,3 +1,4 @@
+import { Lightbulb } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 export default function QuestionSection({ mockInterviewQuestion }) {
@@ -27,7 +28,15 @@ export default function QuestionSection({ mockInterviewQuestion }) {
             </h2>
           ))}
         </div>
-        <h2 className='my-5 text-sm md:text-md'>{mockInterviewQuestion[activeQuestionIndex]?.question}</h2>
+        <h2 className='my-5 text-md md:text-lg'>{mockInterviewQuestion[activeQuestionIndex]?.question}</h2>
+
+        <div className='border rounded-lg p-5 bg-blue-200 mt-28'>
+          <h2 className='flex gap-2 items-center text-blue-700 '>
+            <Lightbulb />
+            <strong> Note: </strong>
+          </h2>
+          <h2 className='text-sm  text-blue-700 my-2'>{process.env.NEXT_PUBLIC_INFORMATION}</h2>
+        </div>
       </div>
     )
   );
