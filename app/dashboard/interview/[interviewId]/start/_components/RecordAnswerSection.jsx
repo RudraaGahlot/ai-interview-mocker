@@ -2,7 +2,8 @@
 
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Button } from '@/components/ui/button'
-import {  Mic, Webcam } from 'lucide-react'
+import {  Mic } from 'lucide-react'
+import Webcam from 'react-webcam';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
@@ -35,9 +36,10 @@ function RecordAnswerSection() {
                 height: 300,
                 width: '100%',
                 zIndex: 10,
-                visibility: 'hidden',
+                // visibility: 'hidden',
               }}
             />
+           
         </div>
         <Button variant="outline" className="my-10"
           onClick={isRecording?stopSpeechToText:startSpeechToText}
