@@ -29,7 +29,7 @@ export default function QuestionSection({ mockInterviewQuestion }) {
           {mockInterviewQuestion.map((question, index) => (
             <h2
               key={index}
-              className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
+              className={`p-2 rounded-full text-xs md:text-sm text-center cursor-pointer ${
                 activeQuestionIndex === index && 'bg-primary text-white'
               }`}
               onClick={() => setActiveQuestionIndex(index)} // Only update state via events
