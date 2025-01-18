@@ -30,7 +30,7 @@ export default function QuestionSection({ mockInterviewQuestion }) {
             <h2
               key={index}
               className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
-                activeQuestionIndex === index && 'bg-blue-700 text-white'
+                activeQuestionIndex === index && 'bg-primary text-white'
               }`}
               onClick={() => setActiveQuestionIndex(index)} // Only update state via events
             >
