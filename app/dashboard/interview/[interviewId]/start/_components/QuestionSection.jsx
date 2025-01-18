@@ -1,7 +1,17 @@
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb, Volume2 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 export default function QuestionSection({ mockInterviewQuestion }) {
+
+    const textToSpeech= (text) =>{
+      if('speechSynthesis' in window){
+        const speech = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(speech)
+      }
+      else {
+        alert('Sorry, your browser does not support text to speech')
+      }
+    }
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
 
   // Ensure state updates happen via useEffect, not during render
@@ -20,7 +30,7 @@ export default function QuestionSection({ mockInterviewQuestion }) {
             <h2
               key={index}
               className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
-                activeQuestionIndex === index && 'bg-cyan-700 text-white'
+                activeQuestionIndex === index && 'bg-blue-700 text-white'
               }`}
               onClick={() => setActiveQuestionIndex(index)} // Only update state via events
             >
@@ -29,13 +39,14 @@ export default function QuestionSection({ mockInterviewQuestion }) {
           ))}
         </div>
         <h2 className='my-5 text-md md:text-lg'>{mockInterviewQuestion[activeQuestionIndex]?.question}</h2>
+        <Volume2 className='cursor-pointer' onClick={()=>textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.question)}> </Volume2>
 
         <div className='border rounded-lg p-5 bg-blue-200 mt-28'>
-          <h2 className='flex gap-2 items-center text-blue-700 '>
+          <h2 className='flex gap-2 items-center text-primary'>
             <Lightbulb />
             <strong> Note: </strong>
           </h2>
-          <h2 className='text-sm  text-blue-700 my-2'>{process.env.NEXT_PUBLIC_INFORMATION}</h2>
+          <h2 className='text-sm  text-primary my-2'>{process.env.NEXT_PUBLIC_INFORMATION}</h2>
         </div>
       </div>
     )

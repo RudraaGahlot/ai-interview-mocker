@@ -21,10 +21,10 @@ function Header() {
       
       {/* Navigation Links */}
       <ul className="hidden md:flex space-x-6 text-gray-700 font-medium ">
-        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard' && 'text-blue-600 font-bold' }`}>Dashboard</li>
-        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/questions' && 'text-blue-600 font-bold' }`}>Questions</li>
-        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/upgarde' && 'text-blue-600 font-bold' }`}>Upgrade</li>
-        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/how' && 'text-blue-600 font-bold' }`}>How it works?</li>
+        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard' && 'text-primary font-bold' }`}>Dashboard</li>
+        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/questions' && 'text-primary font-bold' }`}>Questions</li>
+        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/upgarde' && 'text-primary font-bold' }`}>Upgrade</li>
+        <li className={`hover:text-blue-600 hover:font-bold cursor-pointer ${path=='/dashboard/how' && 'text-primary font-bold' }`}>How it works?</li>
       </ul>
       
    
