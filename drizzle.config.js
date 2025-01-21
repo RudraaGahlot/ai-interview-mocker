@@ -1,4 +1,4 @@
- { import("drizzle-kit").Config } 
+ { import("drizzle-kit").config; } 
 
  require('dotenv').config();
 
@@ -6,7 +6,7 @@ module.exports = {
     schema: "./utils/schema.js",
     dialect: 'postgresql',
     dbCredentials: {
-       url : DATABASE_URL 
+       url : process.env.NEXT_PUBLIC_DATABASE_URL 
    },
     
     connection: {

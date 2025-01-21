@@ -47,14 +47,10 @@ function AddNewInterview() {
     
     const result = await chatSession.sendMessage(InputPrompt);
 
-    const MockJSONResp = (await result.response.text()).replace(/```json|```/g, '').trim(); // Remove any leading/trailing whitespace
+    const MockJSONResp = (await result.response.text()).replace(/```json|```/g, '').trim();
     console.log(MockJSONResp);
     console.log(JSON.parse(MockJSONResp));
     setJsonResponse(JSON.parse(MockJSONResp));
-
-    // const MockJSONResp = (result.response.text()).replace('```json', '').replace('```', '');
-    // console.log(JSON.parse(MockJSONResp));
-    // setJsonResponse(MockJSONResp);
 
     if(MockJSONResp){
     const resp  = await db.insert(MockInterview).values({

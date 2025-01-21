@@ -19,11 +19,7 @@ function Interview({ params }) {
        console.log(unwrappedParams.interviewId);
        GetInterviewDetails();
        
-    }, []); // Dependency array ensures this runs when interviewId changes
-
-    /**
-     * Used to get interview details by mockId
-     */
+    }, []); 
     const GetInterviewDetails = async () => {
 
             const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, unwrappedParams.interviewId));
@@ -65,22 +61,23 @@ function Interview({ params }) {
             :
             <>
             <WebcamIcon className='h-72 my-5 w-full p-20 bg-secondary rounded-lg border'/>
-            <Button className="w-full bg-transparent text-black hover:text-white transition-all border-solid border-2" onClick={() => setWebCamEnabled(true)} >
-                Allow permission for Cam and Mic
+            <Button className=" bg-blue-500 text-white hover:text-white transition-all border-solid border-2" onClick={() => setWebCamEnabled(true)} >
+                Allow permission for Camera and Microphone
             </Button>
             </>
             }
+
+            <div className="mt-5 flex justify-center items-center">
+                    <Link href={`/dashboard/interview/${unwrappedParams.interviewId}/start`} >
+                        <Button >Start Interview</Button>
+                        </Link>
+                    
+                    </div>
             
-        </div>  
-       
+            </div>   
         
         </div>
-        <div className="mt-5 flex justify-end items-end">
-            <Link href={`/dashboard/interview/${unwrappedParams.interviewId}/start`} >
-                <Button >Start Interview</Button>
-                </Link>
-            
-            </div>
+        
     </div>
   )
 }

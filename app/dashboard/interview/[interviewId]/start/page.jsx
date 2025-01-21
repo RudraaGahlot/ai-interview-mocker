@@ -5,6 +5,7 @@ import { eq } from 'drizzle-orm';
 import React, { use, useEffect, useState } from 'react'
 import QuestionSection from './_components/QuestionSection';
 import RecordAnswerSection from './_components/RecordAnswerSection';
+import { Button } from '@/components/ui/button';
 
 function StartInterview({params}){
     const unwrappedParams = use(params);
@@ -32,12 +33,20 @@ function StartInterview({params}){
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
             {/* Questions */}
             <QuestionSection 
-            mockInterviewQuestion = {mockInterviewQuestion}
-            activeQuestionIndex = {activeQuestionIndex}
+                mockInterviewQuestion = {mockInterviewQuestion}
+                activeQuestionIndex = {activeQuestionIndex}
             />
 
             {/* Video / Audio Recording */}
-            <RecordAnswerSection />
+            <RecordAnswerSection 
+                
+            />
+        </div>
+
+        <div>
+            <Button> Prev</Button>
+            <Button>Next</Button>
+            <Button>End</Button>
         </div>
     </div>
   )

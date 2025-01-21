@@ -2,7 +2,7 @@
 
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Button } from '@/components/ui/button'
-import {  Mic } from 'lucide-react'
+import {  Mic, StopCircle } from 'lucide-react'
 import Webcam from 'react-webcam';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -46,11 +46,13 @@ function RecordAnswerSection() {
         >
           {
             isRecording?
-            <h2 className='text-red-600 flex gap-2'>
-              <Mic>Stop Recording</Mic>
+            <h2 className='text-red-600 animate-pulse flex gap-2 items-center'>
+              <StopCircle />Stop Recording
             </h2>
             :
-          'Record Answer'}
+            <h2 className='text-primary flex gap-2 items-center'>
+                <Mic />Record Answer
+                </h2>   }
           </Button>
 
             <Button
