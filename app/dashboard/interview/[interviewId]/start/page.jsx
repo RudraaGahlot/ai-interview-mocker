@@ -43,13 +43,16 @@ function StartInterview({params}){
             />
         </div>
 
-        <div>
-            <Button> Prev</Button>
-            <Button>Next</Button>
-            <Button>End</Button>
+        <div className='flex justify-end gap-6 '>
+            {activeQuestionIndex > 0 && <Button> Prev</Button>}
+            {activeQuestionIndex != mockInterviewQuestion?.length-1 &&<Button>Next</Button>}
+            {activeQuestionIndex == mockInterviewQuestion?.length-1 && <Button>End</Button>}
         </div>
     </div>
   )
 }
 
 export default StartInterview
+
+
+

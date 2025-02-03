@@ -57,7 +57,7 @@ function Header() {
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-md">
+    <div className="flex items-center justify-between p-2 bg-white shadow-md">
       {/* Logo Section */}
       <div className="cursor-pointer" onClick={() => navigate('/')}>
         <Image src="/logo.png" width={245} height={100} alt="logo" 

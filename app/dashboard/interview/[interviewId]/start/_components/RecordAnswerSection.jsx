@@ -1,34 +1,39 @@
 "use client"
 
-import useSpeechToText from 'react-hook-speech-to-text';
-import { Button } from '@/components/ui/button'
-import {  Mic, StopCircle } from 'lucide-react'
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Webcam from 'react-webcam';
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic';
+import { Button } from '@/components/ui/button';
+import { Mic } from 'lucide-react';
 
-function RecordAnswerSection() {
+// Dynamically import the useSpeechToText hook to ensure it only runs on the client side
+const useSpeechToText = dynamic(() => import('react-hook-speech-to-text').then(mod => mod.useSpeechToText), { ssr: false });
+
+function RecordAnswerSection({ results }) {
   const [userAnswer, setUserAnswer] = useState('');
   const {
     error,
     interimResult,
     isRecording,
-    results,
+    results: speechResults,
     startSpeechToText,
-    stopSpeechToText,
+    stopSpeechToText
   } = useSpeechToText({
     continuous: true,
     useLegacyResults: false
   });
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && results) {
       results.map((result) => (
-        setUserAnswer(prevAns => prevAns+result?.transcript)
-      ))
-  }, [results])
+        setUserAnswer(prevAns => prevAns + result?.transcript)
+      ));
+    }
+  }, [results]);
   return (
     <div className=' flex flex-col items-center justify-center'>
-        <div className='flex flex-col mt-10 my-5 justify-center items-center bg-secondary rounded-lg p-5 bg-black'>
+        <div className='flex flex-col mt-6 my-5 justify-center items-center rounded-lg p-5 bg-black'>
             <Image alt='WebCam' src={'/webcam.png'} width={200} height={200} className='absolute'/>
             <Webcam
               mirrored= "true"
@@ -54,13 +59,9 @@ function RecordAnswerSection() {
                 <Mic />Record Answer
                 </h2>   }
           </Button>
-
-            <Button
-              onClick={()=>{console.log(userAnswer);
-              }}
-            >Show User Answer</Button>
     </div>
   )
 }
 
 export default RecordAnswerSection
+
